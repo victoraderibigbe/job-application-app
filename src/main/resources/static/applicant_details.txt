@@ -1,0 +1,24 @@
+Dear Adeyemi,
+
+Thank you for applying for the job. Here are your details:
+
+First Name: Adeyemi
+Last Name: Aderinto
+Email: Adeyemicaderinto@gmail.com
+Phone Number: +2348039740966
+Address: SQI College of ICT
+Profession: Software Engineer/CEO
+Hobby: Teaching/Coding
+Age: 0
+Dear Jinad,
+
+Thank you for applying for the job. Here are your details:
+
+First Name: Jinad
+Last Name: Tope
+Email: isaacjinad@gmail.com
+Phone Number: +2349063219493
+Address: Ogbomoso
+Profession: Software Engineer
+Hobby: Coding/Gym/Reading
+Age: 0
