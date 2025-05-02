@@ -13,20 +13,28 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.bytesnova.jobs.models.Applicant;
+import com.bytesnova.jobs.repositories.ApplicantRepository;
 
 @Controller
 public class JobFormController {
 
     @Autowired
+    private ApplicantRepository applicantRepository;
     private JavaMailSender mailSender;
 
     @GetMapping("/job-form")
@@ -38,6 +46,9 @@ public class JobFormController {
 
     @PostMapping("/submit-application")
     public String submitApplication(@ModelAttribute("applicant") Applicant applicant, Model model) {
+        // Save applicant details to the database
+        applicantRepository.save(applicant);
+
         String filepath = "src/main/resources/static/applicant_details.txt";
 
         // Write applicant details to a text file
@@ -92,7 +103,25 @@ public class JobFormController {
         sendEmailWithAttachment(applicant.getEmail(), fileContent.toString(), filepath);
 
         // Redirect to the results page
-        return "redirect:/results";
+        return "redirect:/applicants";
+    }
+
+    @GetMapping("/download-file")
+    public ResponseEntity<Resource> downloadFile() {
+        String filePath = "src/main/resources/static/applicant_details.txt";
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        Resource resource = new FileSystemResource(file);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getName());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(resource);
     }
 
     @GetMapping("/results")
@@ -113,6 +142,43 @@ public class JobFormController {
         model.addAttribute("fileContents", fileContents);
 
         return "results";
+    }
+
+    @GetMapping("/applicants")
+    public String listApplicants(Model model) {
+        // Fetch all applicants from the database
+        List<Applicant> applicants = applicantRepository.findAll();
+        model.addAttribute("applicants", applicants);
+        return "applicants";
+    }
+
+    @GetMapping("/applicants/view/{id}")
+    public String viewApplicant(@PathVariable Long id, Model model) {
+        Applicant applicant = applicantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
+        model.addAttribute("applicant", applicant);
+        return "view_applicant";
+    }
+
+    @GetMapping("/applicants/edit/{id}")
+    public String editApplicant(@PathVariable Long id, Model model) {
+        Applicant applicant = applicantRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid applicant ID: " + id));
+        model.addAttribute("applicant", applicant);
+        return "edit_applicant";
+    }
+
+    @PostMapping("/applicants/edit/{id}")
+    public String updateApplicant(@PathVariable Long id, @ModelAttribute Applicant applicant) {
+        applicant.setId(id);
+        applicantRepository.save(applicant);
+        return "redirect:/applicants";
+    }
+
+    @GetMapping("/applicants/delete/{id}")
+    public String deleteApplicant(@PathVariable Long id) {
+        applicantRepository.deleteById(id);
+        return "redirect:/applicants";
     }
 
     private void sendEmailWithAttachment(String recipientEmail, String messageContent, String filePath) {

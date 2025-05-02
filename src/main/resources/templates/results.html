@@ -14,6 +14,9 @@
   <body>
     <div class="container my-3">
       <h5 class="text-center text-secondary">Applicant Details</h5>
+      <div class="my-4">
+        <a href="/download-file" class="btn btn-primary">Download Details</a>
+      </div>
       <pre th:each="line : ${fileContents}" th:text="${line}"></pre>
     </div>
 

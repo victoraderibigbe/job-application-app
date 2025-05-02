@@ -1,24 +1,60 @@
-Dear Adeyemi,
+Dear Victor,
 
 Thank you for applying for the job. Here are your details:
 
-First Name: Adeyemi
-Last Name: Aderinto
-Email: Adeyemicaderinto@gmail.com
-Phone Number: +2348039740966
-Address: SQI College of ICT
-Profession: Software Engineer/CEO
-Hobby: Teaching/Coding
+First Name: Victor
+Last Name: Aderibigbe
+Email: aderibigbetoluwani5@gmail.com
+Phone Number: 09032317059
+Address: Adenike Area
+Profession: Software Engineer
+Hobby: Coding
 Age: 0
-Dear Jinad,
+Dear John,
 
 Thank you for applying for the job. Here are your details:
 
-First Name: Jinad
-Last Name: Tope
-Email: isaacjinad@gmail.com
-Phone Number: +2349063219493
-Address: Ogbomoso
+First Name: John
+Last Name: Doe
+Email: johndoe@gmail.com
+Phone Number: +12323454345
+Address: 651 N Broad Street
+Profession: Data Scientist
+Hobby: Coding/Gym/Reading
+Age: 24
+Dear Smith,
+
+Thank you for applying for the job. Here are your details:
+
+First Name: Smith
+Last Name: Walker
+Email: smith01@gmail.com
+Phone Number: +1739390403
+Address: 651 N Broad Street, Delaware, US
+Profession: UX Designer
+Hobby: Designing
+Age: 22
+Dear Oluwasemiloore,
+
+Thank you for applying for the job. Here are your details:
+
+First Name: Oluwasemiloore
+Last Name: Adesuyi
+Email: semiloore01@gmail.com
+Phone Number: 09032317059
+Address: Adenike Area
+Profession: Software Engineer
+Hobby: Coding/Gym/Reading
+Age: 20
+Dear Victor,
+
+Thank you for applying for the job. Here are your details:
+
+First Name: Victor
+Last Name: Aderibigbe
+Email: aderibigbetoluwani5@gmail.com
+Phone Number: 09032317059
+Address: Adenike Area
 Profession: Software Engineer
 Hobby: Coding/Gym/Reading
 Age: 0
